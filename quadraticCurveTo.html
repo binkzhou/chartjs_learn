@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>canvas - 绘制二次贝塞尔曲线</title>
+    <style>
+      /* 给画布增加一个阴影和圆角的样式 */
+      canvas {
+        box-shadow: 0px 0px 5px #ccc;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" width="500" height="500"> </canvas>
+    <script>
+      // 获取 canvas 元素
+      var canvas = document.getElementById('canvas');
+      // 通过判断getContext方法是否存在来判断浏览器的支持性
+      if (canvas.getContext) {
+        // 获取绘图上下文
+        var ctx = canvas.getContext('2d');
+        // 绘制一段二次贝塞尔曲线
+        ctx.moveTo(50, 50);
+        ctx.quadraticCurveTo(200, 200, 350, 50);
+        // 绘制
+        ctx.stroke();
+
+        // P0 (50, 50),P1 (200, 200),P2 (350, 50)
+        const t = 0.3;
+
+        const x = (1 - t) * (1 - t) * 50 + 2 * t * (1 - t) * 200 + t * t * 350;
+        const y = (1 - t) * (1 - t) * 50 + 2 * t * (1 - t) * 200 + t * t * 50;
+        ctx.beginPath();
+        ctx.arc(x, y, 5, 0, 2 * Math.PI);
+        console.log(x, y);
+        ctx.fill();
+        // ctx.arc(200, 200, 5, 0, 2 * Math.PI);
+        // ctx.fill();
+        // ctx.beginPath();
+        // ctx.arc(350, 50, 5, 0, 2 * Math.PI);
+        // ctx.fill();
+      }
+    </script>
+  </body>
+</html>
